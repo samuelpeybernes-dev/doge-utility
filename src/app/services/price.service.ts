@@ -1,47 +1,36 @@
 import { Injectable } from '@angular/core';
-import { PriceApi } from '../interfaces/price.interface';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-const WEB_SOCKET_ENDPOINT = 'wss://api.coincap.io/v2/';
 
-@Injectable({ providedIn: 'root' })
-export class PriceApiService implements PriceApi {
-  private webSocket: WebSocket;
+interface AssetData {
+  id: string;
+  priceUsd: string;
+}
 
-  public getPrice(currency: string): Observable<string> {
-    return this.connectToPriceStream(currency);
-  }
+@Injectable({
+  providedIn: 'root'
+})
+export class PriceService {
 
-  public unsubscribe() {
-    this.webSocket.close();
-  }
+  constructor(private http: HttpClient) { }
 
-  private connectToPriceStream(asset: string): Observable<string> {
-    this.createConnection(asset);
+  fetchAssets(): Observable<AssetData[]> {
+    return this.http.get<any>('https://api.coincap.io/v2/assets').pipe(
+      map(response => {
+        // Filtrer les données pour ne récupérer que Bitcoin, Dogecoin et Ethereum
+        const filteredData = response.data.filter((asset: any) => 
+          asset.id === 'bitcoin' || asset.id === 'dogecoin' || asset.id === 'ethereum'
+        );
 
-    return new Observable(observer => {
-      const webSocket = this.webSocket;
-
-      webSocket.onmessage = (msg: MessageEvent) => {
-        const data = JSON.parse(msg.data);
-        observer.next(data[asset]);
-      };
-
-      return {
-        unsubscribe(): void {
-          webSocket.close();
-        }
-      };
-    });
-  }
-
-  private createConnection(asset: string) {
-    if (this.webSocket) {
-      this.webSocket.close();
-    }
-
-    this.webSocket = new WebSocket(
-      WEB_SOCKET_ENDPOINT + `?assets=${asset}`
+        // Mapper les données filtrées dans la structure de données attendue
+        return filteredData.map((asset: any) => ({
+          id: asset.id,
+          priceUsd: asset.priceUsd
+        })) as AssetData[];
+      })
     );
   }
+
 }

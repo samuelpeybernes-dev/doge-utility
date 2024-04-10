@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import {NgFor, NgForOf} from "@angular/common";
 
 @Component({
@@ -9,12 +9,6 @@ import {NgFor, NgForOf} from "@angular/common";
   templateUrl: './much-price.component.html',
   styleUrl: './much-price.component.css'
 })
-export class muchPriceComponent {
-  @Output() selected = new EventEmitter<string>();
-
-  assets = [
-    { value: 'bitcoin', label: 'Bitcoin' },
-    { value: 'litecoin', label: 'Litecoin' },
-    { value: 'ethereum', label: 'Ethereum' }
-  ];
+export class MuchPriceComponent {
+  @Input() assets: any[] = [];
 }

@@ -3,10 +3,8 @@
     Cryptocurrency
   </label>
 
-  <select class="ml-2" id='crypto' (input)="selected.next($any($event.target).value)">
-    <option selected value=''>------</option>
-    <option *ngFor='let asset of assets' [attr.value]='asset.value'>
-      {{ asset.label }}
-    </option>
-  </select>
+  <div *ngFor="let asset of assets">
+    <p>{{ asset.priceUsd }}</p>
+  </div>
+
 </div>

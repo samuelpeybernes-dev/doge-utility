@@ -1,21 +1,9 @@
 <h1>Crypto Live Price</h1>
 
 <div class='mt-5'>
-  <much-price (selected)="onCryptoSelected($event)"></much-price>
+  <much-price [assets]="assets"></much-price>
 
-  <div class='price'>
-    {{ price$  }}
-  </div>
+  <wow-cex [wowCex]="wowCex"></wow-cex>
 
-  <ng-container *ngIf="(price$ ) === undefined && (currency$ )">
-    <div class='alert alert-info mt-2'>
-      Awaiting for Price...
-    </div>
-  </ng-container>
 
-  <ng-container *ngIf="!(currency$ )">
-    <div class='alert alert-warning mt-2'>
-      No Crypto Subscribed Yet
-    </div>
-  </ng-container>
 </div>
