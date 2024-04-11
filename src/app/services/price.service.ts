@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-
-interface AssetData {
-  id: string;
-  priceUsd: string;
-}
+import { Price as PriceData } from '../interfaces/price.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +11,7 @@ export class PriceService {
 
   constructor(private http: HttpClient) { }
 
-  fetchAssets(): Observable<AssetData[]> {
+  fetchAssets(): Observable<PriceData[]> {
     return this.http.get<any>('https://api.coincap.io/v2/assets').pipe(
       map(response => {
         // Filtrer les données pour ne récupérer que Bitcoin, Dogecoin et Ethereum
@@ -28,7 +23,7 @@ export class PriceService {
         return filteredData.map((asset: any) => ({
           id: asset.id,
           priceUsd: asset.priceUsd
-        })) as AssetData[];
+        })) as PriceData[];
       })
     );
   }

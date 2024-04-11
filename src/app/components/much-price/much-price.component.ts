@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import {NgFor, NgForOf} from "@angular/common";
+import {NgFor} from "@angular/common";
+import { Price as PriceData } from '../../interfaces/price.interface';
 
 @Component({
   selector: 'much-price',
@@ -10,5 +11,5 @@ import {NgFor, NgForOf} from "@angular/common";
   styleUrl: './much-price.component.css'
 })
 export class MuchPriceComponent {
-  @Input() assets: any[] = [];
+  @Input() muchPrices: PriceData[] = [];
 }

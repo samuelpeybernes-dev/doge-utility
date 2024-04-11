@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ExchangeData } from '../../services/cex.service';
+import { Cex as ExchangeData } from '../../interfaces/cex.interface';
 import { NgFor } from '@angular/common';
 @Component({
   selector: 'wow-cex',

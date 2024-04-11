@@ -1,6 +1,4 @@
-import { Observable } from 'rxjs';
-
-export interface PriceApi {
-  getPrice(currency: string): Observable<string>;
-  unsubscribe(): void;
+export interface Price {
+    id: string;
+    priceUsd: string;
 }
