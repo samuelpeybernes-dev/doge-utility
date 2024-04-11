@@ -21,8 +21,10 @@ export class PriceService {
 
         // Mapper les données filtrées dans la structure de données attendue
         return filteredData.map((asset: any) => ({
-          id: asset.id,
-          priceUsd: asset.priceUsd
+          name: asset.name,
+          priceUsd: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(
+            asset.priceUsd,
+          ),
         })) as PriceData[];
       })
     );

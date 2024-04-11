@@ -12,4 +12,17 @@ import { Price as PriceData } from '../../interfaces/price.interface';
 })
 export class MuchPriceComponent {
   @Input() muchPrices: PriceData[] = [];
+
+  showLogo(price: PriceData) {
+    switch (price.name) {
+      case 'Ethereum':
+        return 'assets/img/ethereum-logo.svg';
+      case 'Bitcoin':
+        return 'assets/img/bitcoin-logo.svg';
+      case 'Dogecoin':
+        return 'assets/img/dogecoin-logo.svg';
+      default:
+        return 'assets/img/dogecoin-logo.svg';
+    }
+  }
 }

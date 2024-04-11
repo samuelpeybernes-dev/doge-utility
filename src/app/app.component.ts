@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MuchPriceComponent } from './components/much-price/much-price.component';
 import { WowCexComponent } from './components/wow-cex/wow-cex.component';
-import { NgIf, NgFor } from '@angular/common';
 import { PriceService } from './services/price.service';
 import { CexService} from './services/cex.service';
 import { Cex as ExchangeData} from './interfaces/cex.interface'
 import { Price as PriceData } from './interfaces/price.interface';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MuchPriceComponent, WowCexComponent, NgIf, NgFor],
+  imports: [RouterOutlet, MuchPriceComponent, WowCexComponent, NavBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

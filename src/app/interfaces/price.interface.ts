@@ -1,4 +1,4 @@
 export interface Price {
-    id: string;
+    name: string;
     priceUsd: string;
 }
