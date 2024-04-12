@@ -12,22 +12,14 @@ export class CexService {
   constructor(private http: HttpClient) { }
 
   
-  fetchWowCex(): Observable<ExchangeData[]> {
+  fetchWowCex(): Observable<ExchangeData> {
     return this.http.get<any>('https://api.coincap.io/v2/exchanges').pipe(
       map(response => {
-        // Filtrer les données pour ne récupérer que l'élément ayant le rang 1
-        const rank1Data = response.data.find((exchange: any) => exchange.rank === '1');
-
-        // Vérifier si l'élément avec le rang 1 existe
-        if (rank1Data) {
-          // Mapper les données dans la structure de données attendue
-          return [{
-            id: rank1Data.exchangeId, // Utiliser exchangeId comme ID pour l'échange
-          }] as ExchangeData[]; // Retourner un tableau d'un seul élément
-        } else {
-          // Si aucun élément avec le rang 1 n'est trouvé, retourner un tableau vide
-          return [] as ExchangeData[];
-        }
+        const rank1Data = response.data.find((exchange: ExchangeData) => exchange.rank === '1');
+          return {
+            id: rank1Data.exchangeId, 
+          } as ExchangeData; 
+        
       })
     );
   }

@@ -9,5 +9,5 @@ import { NgFor } from '@angular/common';
   styleUrl: './wow-cex.component.css'
 })
 export class WowCexComponent {
-  @Input() wowCex: ExchangeData[] = [];
+  @Input() wowCex: ExchangeData;
 }
