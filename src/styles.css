@@ -1,14 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS */
 
-html,
-body {
-    height: 100%;
+@layer tailwind-base, primeng, tailwind-utilities;
+
+/* Primeng Settings */
+@import "primeng/resources/primeng.css";
+@import "primeng/resources/themes/mira/theme.css";
+@import "primeicons/primeicons.css";
+
+@layer tailwind-base {
+    @tailwind base;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
 }
