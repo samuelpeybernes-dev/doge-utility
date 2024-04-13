@@ -1,13 +1,14 @@
 <nav class="bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-600">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a routerLink="/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="https://www.pngall.com/wp-content/uploads/10/Dogecoin-PNG-Photo.png" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Dogecoin</span>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <a href="https://www.binance.com/fr/price/dogecoin"
-        class="text-gray-900 bg-yellow-200 hover:bg-yellow-400 font-medium rounded-lg text-sm px-4 py-2 text-center">Acheter
+      <a class="p-button bg-yellow-400 hover:bg-yellow-200 rounded-lg text-gray-900 border-0 font-bold h-10"
+        href="https://www.binance.com/fr/price/dogecoin">Acheter
         dogecoin</a>
+
       <button data-collapse-toggle="navbar-sticky" type="button"
         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
         aria-controls="navbar-sticky" aria-expanded="false">
@@ -22,11 +23,11 @@
       <ul
         class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
         <li>
-          <a routerLink="/bourse"
+          <a routerLink="/bourse" routerLinkActive="text-yellow-400"
             class="block py-2 px-3 text-white bg-yellow-700 rounded md:bg-transparent md:p-0 md:hover:text-yellow-400">Bourse</a>
         </li>
         <li>
-          <a routerLink="/billeterie"
+          <a routerLink="/billeterie" routerLinkActive="text-yellow-400"
             class="block py-2 px-3 text-white bg-yellow-700 rounded md:bg-transparent md:p-0 md:hover:text-yellow-400">Billeterie</a>
         </li>
       </ul>

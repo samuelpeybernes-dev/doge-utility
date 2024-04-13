@@ -3,11 +3,12 @@ import { PriceService } from '../../services/price.service';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'ticket-shop',
   standalone: true,
-  imports: [ButtonModule, InputNumberModule, FormsModule],
+  imports: [ButtonModule, InputNumberModule, FormsModule, DialogModule],
   templateUrl: './ticket-shop.component.html',
   styleUrl: './ticket-shop.component.css'
 })
@@ -15,6 +16,8 @@ export class TicketShopComponent {
   totalDogePrice: number;
   totalUsdPrice: string;
   nbrTickets: number = 1;
+  visible: boolean = false;
+
   constructor(private priceService: PriceService) {}
 
   ngOnInit() {
@@ -47,4 +50,8 @@ export class TicketShopComponent {
         (4 * this.nbrTickets) / 100 * 95 );
     }
   }
+
+  showDialog() {
+    this.visible = true;
+}
 }
