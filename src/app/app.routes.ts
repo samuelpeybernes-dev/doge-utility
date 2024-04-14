@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { CourseComponent } from './components/course/course.component';
-import { TicketShopComponent } from './components/ticket-shop/ticket-shop.component';
+import { MarketsComponent } from './markets/markets.component';
+import { TicketShopComponent } from './ticket-shop/ticket-shop.page';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'bourse', pathMatch: 'full' },
-    { path: 'bourse', component: CourseComponent },
+    { path: 'bourse', component: MarketsComponent },
     { path: 'billeterie', component: TicketShopComponent },
 ];

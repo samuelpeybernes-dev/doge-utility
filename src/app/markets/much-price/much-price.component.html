@@ -1,0 +1,17 @@
+<div class="flex flex-wrap mt-[-30px] ">
+  <div *ngFor="let crypto of muchPrices; let i = index" class="w-full min-[1024px]:w-4/12 px-4 z-50	"
+    [ngClass]="i !== 1 ? 'lg:pt-12 min-[1024px]:pt-6' : 'pt-0'">
+    <div class="bg-white rounded-3xl border shadow-xl p-8 mb-8  w-75">
+      <div class="flex justify-between items-center mb-4">
+        <button
+          class="inline-flex items-center justify-center w-14 h-14 text-blue-100 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full">
+          <img [src]="showLogo(crypto)" class="h-8" alt="Crypto logo">
+        </button>
+      </div>
+      <div>
+        <h3 class="font-semibold text-sm text-gray-400">{{ crypto.name }}</h3>
+        <h1 class="font-semibold text-xl text-gray-700">{{ crypto.priceUsd }}</h1>
+      </div>
+    </div>
+  </div>
+</div>

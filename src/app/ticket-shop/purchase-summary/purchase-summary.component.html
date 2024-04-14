@@ -1,0 +1,20 @@
+<p-dialog header="Header" [(visible)]="showPurchaseSummary" closable="false" [modal]="true" [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+  <ng-template pTemplate="header">
+    <div class="inline-flex align-items-center justify-content-center gap-2 mx-auto">
+      <span class="font-bold white-space-nowrap">Commande confirmée ✅</span>
+    </div>
+  </ng-template>
+  <p class="m-0 text-center">
+    Merci d'avoir acheté vos billets avec Dogecoin! <br>
+    Voici un récapitulatif de votre achat: <br>
+    Nombre de billets: {{ purchaseSummary.nbrTickets}} <br>
+    Prix total en Dogecoin: {{purchaseSummary.totalDogePrice}} DOGE<br>
+    Prix total en dollar: {{purchaseSummary.totalUsdPrice}}
+  </p>
+  <ng-template pTemplate="footer">
+    <p-button (click)="closeDialogAndReset()" label="Ok"
+      styleClass="bg-yellow-400 hover:bg-yellow-200 rounded-lg text-gray-900 border-0" class="yellow-400"
+      icon="pi pi-check"></p-button>
+  </ng-template>
+</p-dialog>
