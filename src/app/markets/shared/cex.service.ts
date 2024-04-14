@@ -10,12 +10,13 @@ import { Cex as ExchangeData} from '../../interfaces/cex.interface'
 export class CexService {
 
   constructor(private http: HttpClient) { }
-
   
   fetchWowCex(): Observable<ExchangeData> {
-    return this.http.get<any>('https://api.coincap.io/v2/exchanges').pipe(
+    return this.http.get<{ data: ExchangeData[] }>('https://api.coincap.io/v2/exchanges').pipe(
       map(response => {
-        const rank1Data = response.data.find((exchange: ExchangeData) => exchange.rank === '1');
+        const rank1Data = response.data.find((exchange: ExchangeData) => exchange.rank === '1') ?? {
+          exchangeId: '',
+        };
           return {
             id: rank1Data.exchangeId, 
           } as ExchangeData; 

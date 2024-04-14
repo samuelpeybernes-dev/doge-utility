@@ -20,13 +20,13 @@ export class WowCexComponent {
   }
 
   fetchData() {
-    this.cexService.fetchWowCex().subscribe(
-      data => {
-          this.wowCex = data;
-      },
-      error => {
+    this.cexService.fetchWowCex().subscribe({
+      next: data => {
+        this.wowCex = data;
+    },
+      error: error => {
         console.error("Une erreur s'est produite:", error);
       }
-    );
+   });
   }
 }

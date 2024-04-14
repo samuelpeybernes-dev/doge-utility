@@ -2,6 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import {NgFor, NgClass} from "@angular/common";
 import { Price as PriceData } from '../../interfaces/price.interface';
 import { CryptoPricesService } from '../shared/crypto-prices.service';
+import { CurrencyFormatService } from '../../shared/currency-format.service';
 
 @Component({
   selector: 'much-price',
@@ -13,21 +14,21 @@ import { CryptoPricesService } from '../shared/crypto-prices.service';
 export class MuchPriceComponent {
   muchPrices: PriceData[] = [];
 
-  constructor(private CryptoPrices: CryptoPricesService) {}
+  constructor(private CryptoPrices: CryptoPricesService, public currencyFormatService: CurrencyFormatService) {}
 
   ngOnInit() {
     this.fetchData(); 
   }
 
   fetchData() {
-    this.CryptoPrices.fetchCryptoPrices().subscribe(
-      data => {
-        this.muchPrices = data;
-      },
-      error => {
-        console.error("Une erreur s'est produite:", error);
-      }
-    );
+    this.CryptoPrices.fetchCryptoPrices().subscribe({
+        next: data => {
+          this.muchPrices = data;
+        },
+        error:  error => {
+          console.error("Une erreur s'est produite:", error);
+        }
+      });
   }
 
   showLogo(price: PriceData) {

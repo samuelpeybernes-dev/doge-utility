@@ -26,19 +26,18 @@ export class ShopCardComponent {
   constructor(private cryptoPrice: SpecificCryptoPriceService, private currencyFormatService: CurrencyFormatService) {}
 
   ngOnInit() {
-    this.fetchData(); // Charge les données pour Bitcoin au démarrage
+    this.fetchData(); 
   }
 
   fetchData() {
-    this.cryptoPrice.fetchSpecificCrypto("dogecoin").subscribe(
-      data => {
+    this.cryptoPrice.fetchSpecificCrypto("dogecoin").subscribe({
+      next: data => {
         this.getTotalPrice(data.priceUsd);
       },
-      error => {
+      error: error => {
         console.error("Une erreur s'est produite:", error);
       }
-    );
-    
+    });
   }
 
   getTotalPrice(cryptoPrice: number) {

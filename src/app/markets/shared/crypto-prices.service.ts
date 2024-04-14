@@ -13,21 +13,20 @@ export class CryptoPricesService {
   constructor(private http: HttpClient, private currencyFormatService: CurrencyFormatService) { }
 
   fetchCryptoPrices(): Observable<PriceData[]> {
-    return this.http.get<any>('https://api.coincap.io/v2/assets').pipe(
+    return this.http.get<{data: PriceData[]}>('https://api.coincap.io/v2/assets').pipe(
       map(response => {
-        // Filtrer les données pour ne récupérer que Bitcoin, Dogecoin et Ethereum
-        const filteredData = response.data.filter((asset: any) => 
-          asset.id === 'bitcoin' || asset.id === 'dogecoin' || asset.id === 'ethereum'
-        );
+        const filteredData = this.getSelectedCryptos(response, ['bitcoin', 'dogecoin', 'ethereum']);
 
-        // Mapper les données filtrées dans la structure de données attendue
-        return filteredData.map((asset: any) => ({
+        return filteredData.map((asset: PriceData) => ({
           name: asset.name,
-          priceUsd: this.currencyFormatService.formatUsdPrice(asset.priceUsd)
+          priceUsd: asset.priceUsd
         })) as PriceData[];
       })
     );
   }
 
- 
+  // Filtre les données pour ne récupérer que les crypto nécessaires
+  private getSelectedCryptos(response: { data: PriceData[]; }, selectedCryptos: string[]) {
+    return response.data.filter((asset: PriceData) => selectedCryptos.includes(asset.id));
+  }
 }

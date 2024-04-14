@@ -12,7 +12,7 @@ export class SpecificCryptoPriceService {
   constructor(private http: HttpClient) { }
 
   fetchSpecificCrypto(cryptoName: string): Observable<PriceData> {
-    return this.http.get<any>(`https://api.coincap.io/v2/assets/${cryptoName}`).pipe(
+    return this.http.get<{ data: PriceData }>(`https://api.coincap.io/v2/assets/${cryptoName}`).pipe(
       map(response => {
         return {
           priceUsd: response.data.priceUsd
