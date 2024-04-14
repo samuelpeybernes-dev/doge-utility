@@ -1,5 +1,5 @@
 export interface Cex {
     rank: string;
-    id: string;
-    exchangeId: string;
+    name: string;
+    exchangeUrl: string;
 }

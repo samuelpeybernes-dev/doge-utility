@@ -15,10 +15,12 @@ export class CexService {
     return this.http.get<{ data: ExchangeData[] }>('https://api.coincap.io/v2/exchanges').pipe(
       map(response => {
         const rank1Data = response.data.find((exchange: ExchangeData) => exchange.rank === '1') ?? {
-          exchangeId: '',
+          name: '',
+          exchangeUrl: ''
         };
           return {
-            id: rank1Data.exchangeId, 
+            name: rank1Data.name, 
+            exchangeUrl: rank1Data.exchangeUrl,
           } as ExchangeData; 
         
       })
