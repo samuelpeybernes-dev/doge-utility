@@ -5,11 +5,11 @@
       <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Dogecoin</span>
     </a>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <a class="p-button bg-yellow-400 hover:bg-yellow-200 rounded-lg text-gray-900 border-0 font-bold h-10"
+      <a class="p-button bg-yellow-400 hover:bg-yellow-200 rounded-lg text-gray-900 border-0 font-bold h-10 "
         href="https://www.binance.com/fr/price/dogecoin">Acheter
-        dogecoin</a>
+        doge</a>
 
-      <button data-collapse-toggle="navbar-sticky" type="button"
+      <button (click)="sidebarVisible = true" data-collapse-toggle="navbar-sticky" type="button"
         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
         aria-controls="navbar-sticky" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
@@ -18,6 +18,22 @@
             d="M1 1h15M1 7h15M1 13h15" />
         </svg>
       </button>
+      <p-sidebar styleClass="bg-gray-900" [(visible)]="sidebarVisible">
+        <ul class="space-y-2">
+          <li>
+            <a routerLink="/bourse" routerLinkActive="text-yellow-400"
+              class="flex  items-center p-2 text-base font-medium text-white group">
+              <span class="ml-3">Bourse</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/billeterie" routerLinkActive="text-yellow-400"
+              class="flex items-center p-2 text-base font-medium text-white group">
+              <span class="ml-3">Billeterie</span>
+            </a>
+          </li>
+        </ul>
+      </p-sidebar>
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
       <ul
