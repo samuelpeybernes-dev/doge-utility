@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SpecificCryptoPriceService } from '../shared/specific-crypto-price.service';
 import { PurchaseSummaryComponent } from '../purchase-summary/purchase-summary.component';
 import { PurchaseSummary } from '../../interfaces/purchase-summary.interface';
+import { CurrencyFormatService } from '../../shared/currency-format.service';
 
 @Component({
   selector: 'shop-card',
@@ -22,7 +23,7 @@ export class ShopCardComponent {
   };
   showPurchaseSummary: boolean = false;
 
-  constructor(private cryptoPrice: SpecificCryptoPriceService) {}
+  constructor(private cryptoPrice: SpecificCryptoPriceService, private currencyFormatService: CurrencyFormatService) {}
 
   ngOnInit() {
     this.fetchData(); // Charge les données pour Bitcoin au démarrage
@@ -46,15 +47,11 @@ export class ShopCardComponent {
 
     if(nbrTickets < 2 ){
       this.purchaseSummary.totalDogePrice = priceCalculated
-      this.purchaseSummary.totalUsdPrice = this.formatUsdPrice( 4 * nbrTickets);
-    }else{
+      this.purchaseSummary.totalUsdPrice = this.currencyFormatService.formatUsdPrice( 4 * nbrTickets);
+    }else{ 
       this.purchaseSummary.totalDogePrice = priceCalculated / 100 * 95;
-      this.purchaseSummary.totalUsdPrice = this.formatUsdPrice((4 * nbrTickets) / 100 * 95 );
+      this.purchaseSummary.totalUsdPrice =  this.currencyFormatService.formatUsdPrice((4 * nbrTickets) / 100 * 95 );
     }
-  }
-
-  formatUsdPrice(price: number): string {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol' }).format(price);
   }
 
   showDialog() {
