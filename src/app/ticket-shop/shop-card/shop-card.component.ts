@@ -41,16 +41,12 @@ export class ShopCardComponent {
   }
 
   getTotalPrice(cryptoPrice: number) {
-    let nbrTickets = this.purchaseSummary.nbrTickets;
-    let priceCalculated = (4 * nbrTickets) / cryptoPrice;
-
-    if(nbrTickets < 2 ){
-      this.purchaseSummary.totalDogePrice = priceCalculated
-      this.purchaseSummary.totalUsdPrice = this.currencyFormatService.formatUsdPrice( 4 * nbrTickets);
-    }else{ 
-      this.purchaseSummary.totalDogePrice = priceCalculated / 100 * 95;
-      this.purchaseSummary.totalUsdPrice =  this.currencyFormatService.formatUsdPrice((4 * nbrTickets) / 100 * 95 );
-    }
+    const { nbrTickets } = this.purchaseSummary;
+    const totalPrice = 4 * nbrTickets;
+    const discountPercentage = nbrTickets >= 2 ? 0.95 : 1;
+  
+    this.purchaseSummary.totalDogePrice = (totalPrice / cryptoPrice) * discountPercentage;
+    this.purchaseSummary.totalUsdPrice = this.currencyFormatService.formatUsdPrice(totalPrice * discountPercentage);
   }
 
   showDialog() {
