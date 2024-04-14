@@ -16,10 +16,14 @@ export class CryptoPricesService {
     return this.http.get<{data: PriceData[]}>('https://api.coincap.io/v2/assets').pipe(
       map(response => {
         const filteredData = this.getSelectedCryptos(response, ['bitcoin', 'dogecoin', 'ethereum']);
-
+        // On place le dogecoin en 2ème position
+        const dogeAsset = filteredData.splice(2, 1)[0];
+        filteredData.splice(1, 0, dogeAsset);
+      
         return filteredData.map((asset: PriceData) => ({
           name: asset.name,
-          priceUsd: asset.priceUsd
+          priceUsd: asset.priceUsd,
+          explorer: asset.explorer
         })) as PriceData[];
       })
     );
