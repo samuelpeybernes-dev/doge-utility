@@ -3,4 +3,5 @@ export interface Price {
     name: string;
     priceUsd: number ;
     explorer: string;
+    changePercent24Hr: number;
 }

@@ -21,7 +21,7 @@ export class MuchPriceComponent {
   }
 
   fetchData() {
-    this.CryptoPrices.fetchCryptoPrices().subscribe({
+    this.CryptoPrices.fetchCryptoPrices(['bitcoin', 'dogecoin', 'ethereum']).subscribe({
         next: data => {
           this.muchPrices = data;
         },

@@ -10,4 +10,8 @@ export class CurrencyFormatService {
       priceUsd
     );
   }
+
+  formatDecimal(decimal: number): string {
+    return new Intl.NumberFormat('en-US').format(decimal);
+  } 
 }

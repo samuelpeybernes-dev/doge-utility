@@ -12,25 +12,23 @@ export class CryptoPricesService {
 
   constructor(private http: HttpClient, private currencyFormatService: CurrencyFormatService) { }
 
-  fetchCryptoPrices(): Observable<PriceData[]> {
-    return this.http.get<{data: PriceData[]}>('https://api.coincap.io/v2/assets').pipe(
+  fetchCryptoPrices(cryptosName: string[]): Observable<PriceData[]> {
+    return this.http.get<{data: PriceData[]}>(`https://api.coincap.io/v2/assets?ids=${cryptosName}`).pipe(
       map(response => {
-        const filteredData = this.getSelectedCryptos(response, ['bitcoin', 'dogecoin', 'ethereum']);
+        let brutData = response.data;
+        
         // On place le dogecoin en 2ème position
-        const dogeAsset = filteredData.splice(2, 1)[0];
-        filteredData.splice(1, 0, dogeAsset);
+        const dogeAsset = brutData.splice(2, 1)[0];
+        brutData.splice(1, 0, dogeAsset);
       
-        return filteredData.map((asset: PriceData) => ({
+        return brutData.map((asset: PriceData) => ({
           name: asset.name,
           priceUsd: asset.priceUsd,
-          explorer: asset.explorer
+          explorer: asset.explorer,
+          changePercent24Hr: asset.changePercent24Hr
         })) as PriceData[];
       })
     );
   }
 
-  // Filtre les données pour ne récupérer que les crypto nécessaires
-  private getSelectedCryptos(response: { data: PriceData[]; }, selectedCryptos: string[]) {
-    return response.data.filter((asset: PriceData) => selectedCryptos.includes(asset.id));
-  }
 }

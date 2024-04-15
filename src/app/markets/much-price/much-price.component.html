@@ -9,6 +9,10 @@
             class="inline-flex items-center justify-center w-14 h-14 text-blue-100 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full">
             <img [src]="showLogo(crypto)" class="h-8" alt="Crypto logo">
           </button></a>
+        <div>
+          <span class="font-bold "
+            [ngClass]="crypto.changePercent24Hr < 0 ? 'text-red-500' : 'text-green-500'">{{ currencyFormatService.formatDecimal(crypto.changePercent24Hr)}}%</span><br />
+        </div>
       </div>
       <div>
         <h3 class="font-semibold text-sm text-gray-400">{{ crypto.name }}</h3>
