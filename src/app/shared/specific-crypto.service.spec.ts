@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SpecificCryptoPriceService } from './specific-crypto-price.service';
+import { SpecificCryptoPriceService } from './specific-crypto.service';
 
 describe('PriceService', () => {
   let service: SpecificCryptoPriceService;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
-import { SpecificCryptoPriceService } from '../shared/specific-crypto-price.service';
+import { SpecificCryptoPriceService } from '../../shared/specific-crypto.service';
 import { PurchaseSummaryComponent } from '../purchase-summary/purchase-summary.component';
 import { PurchaseSummary } from '../../interfaces/purchase-summary.interface';
 import { CurrencyFormatService } from '../../shared/currency-format.service';
@@ -30,7 +30,7 @@ export class ShopCardComponent {
   }
 
   fetchData() {
-    this.cryptoPrice.fetchSpecificCrypto("dogecoin").subscribe({
+    this.cryptoPrice.fetchPrice("dogecoin").subscribe({
       next: data => {
         this.getTotalPrice(data.priceUsd);
       },
