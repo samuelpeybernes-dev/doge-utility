@@ -1,1 +1,12 @@
-<chart-card></chart-card>
+<section class="py-24 relative">
+  <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+
+    <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Performance de la crypto
+    </h2>
+    <div class=" mb-10">
+      <dropdown [listData]="cryptosName" (emitSelectedLabel)="receiveCrypto($event)"></dropdown>
+    </div>
+
+    <chart-card [cryptoSelected]="cryptoSelected"></chart-card>
+  </div>
+</section>

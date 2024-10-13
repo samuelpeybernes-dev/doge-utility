@@ -1,0 +1,2 @@
+<p-autoComplete [forceSelection]="true" [(ngModel)]="selectedLabel" [dropdown]="true" [suggestions]="filteredLabel"
+  (completeMethod)="filterLabel($event)" (onSelect)="onLabelSelect()" />

@@ -1,13 +1,9 @@
 export interface Candle {
-    priceUsd: string;
-    time: number;
-  }
-
-export interface CandleApiResponse {
-    data: Candle[];
-  } 
+  priceUsd: string;
+  time: number;
+}
 
 export interface chartData {
-    labels: string[], 
-    prices: number[] 
+  labels: string[];
+  prices: number[];
 }

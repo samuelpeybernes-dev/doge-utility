@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { SpecificCryptoPriceService } from '../../shared/specific-crypto.service';
 
@@ -11,18 +11,32 @@ import { SpecificCryptoPriceService } from '../../shared/specific-crypto.service
 })
 export class ChartCardComponent {
   constructor(private cryptoService: SpecificCryptoPriceService) {}
+  @Input() cryptoSelected: string;
 
   data: any;
 
+  ngOnInit() {
+    this.fetchData();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['cryptoSelected']) {
+      this.fetchData();
+    }
+  }
   fetchData() {
-    this.cryptoService.fetchCandles('dogecoin').subscribe({
+    const formattedCryptoName = this.cryptoSelected
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/\./g, '-');
+    this.cryptoService.fetchCandles(formattedCryptoName).subscribe({
       next: (candleData) => {
         this.data = {
           labels: candleData.labels,
           datasets: [
             {
               type: 'line',
-              label: 'dogecoin',
+              label: this.cryptoSelected,
               borderColor: 'rgb(250 204 21)',
               backgroundColor: 'rgb(250, 204, 21, 0.2)',
               borderWidth: 2,
@@ -37,9 +51,5 @@ export class ChartCardComponent {
         console.error("Une erreur s'est produite:", error);
       },
     });
-  }
-
-  ngOnInit() {
-    this.fetchData();
   }
 }
