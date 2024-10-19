@@ -3,10 +3,12 @@
 
     <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Performance de la crypto
     </h2>
-    <div class=" mb-10">
-      <dropdown [listData]="cryptosName" (emitSelectedLabel)="receiveCrypto($event)"></dropdown>
+    <div class="mb-10">
+      <dropdown [selectedLabel]="cryptoSelected" [listData]="cryptosName" (emitSelectedLabel)="receiveCrypto($event)">
+      </dropdown>
+      <p-calendar class="ml-5" [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" />
     </div>
 
-    <chart-card [cryptoSelected]="cryptoSelected"></chart-card>
+    <chart-card [cryptoSelected]="cryptoSelected" [dateSelected]="rangeDates"></chart-card>
   </div>
 </section>

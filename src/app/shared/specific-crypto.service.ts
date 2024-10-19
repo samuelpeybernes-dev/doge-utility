@@ -25,10 +25,16 @@ export class SpecificCryptoPriceService {
       );
   }
 
-  fetchCandles(cryptoName: string): Observable<chartData> {
+  fetchCandles(
+    cryptoName: string,
+    startDate: Date,
+    endDate: Date
+  ): Observable<chartData> {
+    const formatedStartDate = new Date(startDate).getTime();
+    const formatedEndDate = new Date(endDate).getTime();
     return this.http
       .get<{ data: Candle[] }>(
-        `https://api.coincap.io/v2/assets/${cryptoName}/history?interval=d1`
+        `https://api.coincap.io/v2/assets/${cryptoName}/history?interval=d1&start=${formatedStartDate}&end=${formatedEndDate}`
       )
       .pipe(
         map((response) => {

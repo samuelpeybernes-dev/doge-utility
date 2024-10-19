@@ -16,9 +16,8 @@ interface AutoCompleteCompleteEvent {
 })
 export class DropdownComponent {
   @Input() listData: any[] | undefined;
+  @Input() selectedLabel: string;
   @Output() emitSelectedLabel = new EventEmitter<string>();
-
-  selectedLabel: any;
 
   filteredLabel: any[];
 

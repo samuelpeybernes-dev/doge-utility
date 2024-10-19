@@ -12,6 +12,7 @@ import { SpecificCryptoPriceService } from '../../shared/specific-crypto.service
 export class ChartCardComponent {
   constructor(private cryptoService: SpecificCryptoPriceService) {}
   @Input() cryptoSelected: string;
+  @Input() dateSelected: Date[];
 
   data: any;
 
@@ -20,7 +21,7 @@ export class ChartCardComponent {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['cryptoSelected']) {
+    if (changes['cryptoSelected'] || changes['dateSelected']) {
       this.fetchData();
     }
   }
@@ -29,27 +30,34 @@ export class ChartCardComponent {
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/\./g, '-');
-    this.cryptoService.fetchCandles(formattedCryptoName).subscribe({
-      next: (candleData) => {
-        this.data = {
-          labels: candleData.labels,
-          datasets: [
-            {
-              type: 'line',
-              label: this.cryptoSelected,
-              borderColor: 'rgb(250 204 21)',
-              backgroundColor: 'rgb(250, 204, 21, 0.2)',
-              borderWidth: 2,
-              fill: true,
-              tension: 0.4,
-              data: candleData.prices,
-            },
-          ],
-        };
-      },
-      error: (error) => {
-        console.error("Une erreur s'est produite:", error);
-      },
-    });
+
+    this.cryptoService
+      .fetchCandles(
+        formattedCryptoName,
+        this.dateSelected[0],
+        this.dateSelected[1]
+      )
+      .subscribe({
+        next: (candleData) => {
+          this.data = {
+            labels: candleData.labels,
+            datasets: [
+              {
+                type: 'line',
+                label: this.cryptoSelected,
+                borderColor: 'rgb(250 204 21)',
+                backgroundColor: 'rgb(250, 204, 21, 0.2)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                data: candleData.prices,
+              },
+            ],
+          };
+        },
+        error: (error) => {
+          console.error("Une erreur s'est produite:", error);
+        },
+      });
   }
 }
